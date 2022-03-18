@@ -5,10 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import com.example.mensajesos.entidades.Contact
-import com.example.mensajesos.entidades.Contactos
 import java.lang.Exception
 import java.util.ArrayList
 

@@ -5,11 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.ContactsContract
@@ -21,10 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.mensajesos.databinding.ActivityMainBinding
-import com.example.mensajesos.db.DBhelper
 import com.example.mensajesos.db.dbcontactos
-import com.example.mensajesos.entidades.Contact
-import com.example.mensajesos.entidades.Contactos
 import com.google.android.gms.location.*
 
 
@@ -41,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     // Iniciación tardía del viewBinding
     lateinit var binding : ActivityMainBinding
+
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
@@ -205,7 +200,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"NO DEJE EL CAMPO DE MENSAJE VACIO POR FAVOR",Toast.LENGTH_SHORT).show()
             }
             //loadelements()
-            listContact.clear()
+            //listContact.clear()
+            listContact.removeAll(listContact)
         }
 
        var dbcontacts = dbcontactos(this)
