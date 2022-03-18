@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
+import kotlin.concurrent.thread
 
 
 class ActBluethooth : AppCompatActivity() {
@@ -38,6 +39,12 @@ class ActBluethooth : AppCompatActivity() {
     private val enableBluetooth: Button? = null
     private  var connectSystem:android.widget.Button? = null
 
+
+    lateinit var blue :BluetoothJhr
+    var initConexion = false
+    var offHilo = false
+
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +52,6 @@ class ActBluethooth : AppCompatActivity() {
 
         var btnON = findViewById<Button>(R.id.btnON)
         var btnOFF = findViewById<Button>(R.id.btnOFF)
-        var btnON2 = findViewById<Button>(R.id.btnON2)
-        var btnOFF2 = findViewById<Button>(R.id.btnOFF2)
         var btnSelectDispositive = findViewById<Button>(R.id.btnSelectDispositive)
         var btnConectar = findViewById<Button>(R.id.btnConectar)
         var btnSalir = findViewById<Button>(R.id.btnSalir)
@@ -56,10 +61,61 @@ class ActBluethooth : AppCompatActivity() {
         var arrayadapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arraylDispositives)
         var txtShow = findViewById<TextView>(R.id.txtShowMessage)
 
-        val bAdapter = BluetoothAdapter.getDefaultAdapter()
+        //val bAdapter = BluetoothAdapter.getDefaultAdapter()
+
+        //val blue = BluetoothJhr(this, lstvBluetooth, ActBluethooth::class.java)
+        //blue.onBluetooth()
+        blue = BluetoothJhr(this, device_name::class.java)
+        //si se pierde conexion no sale sino que avisa con un mensaje  error
+        blue.exitErrorOk(true)
+        //mensaje conectado
+        blue.mensajeConexion("Conectado jhr")
+        //mensaje de error
+        blue.mensajeErrorTx("algo salio mal")
+
+        thread(start = true){
+            while (!initConexion && !offHilo){
+                Thread.sleep(500)
+            }
+
+            while (!offHilo){
+                var mensaje = blue.mRx()
+                if (mensaje!=""){
+                    txtShow.post {
+
+                        txtShow.text = mensaje
+
+                    }
+                }
+                Thread.sleep(100)
+            }
+
+        }
+
+        btnON.setOnClickListener {
+            blue.mTx("A")
+        }
 
 
-        btnSelectDispositive.setOnClickListener {
+        btnON.setOnLongClickListener {
+            blue.exitConexion()
+            offHilo = true
+            false
+        }
+        btnOFF.setOnClickListener {
+            blue.mTx("B")
+        }
+
+
+        btnOFF.setOnLongClickListener {
+            blue.exitConexion()
+            offHilo = true
+            false
+        }
+
+
+
+       /* btnSelectDispositive.setOnClickListener {
             arraylDispositives.removeAll(arraylDispositives)
             // Checks if Bluetooth Adapter is present
             if (bAdapter == null) {
@@ -92,31 +148,35 @@ class ActBluethooth : AppCompatActivity() {
                     }
                 }
             }
-        }
+        }*/
 
         lstvBluetooth.setOnItemClickListener { adapterView, view, i, l ->
             //var m = arraylDispositives[i]
             //txtShow.text = arraylDispositives[i]
-            txtShow.text = lstvBluetooth.getItemAtPosition(i) as String
+
+            //txtShow.text = lstvBluetooth.getItemAtPosition(i) as String
+            //blue.bluetoothSeleccion(i)
         }
 
         btnConectar.setOnClickListener {
-            var aux = txtShow.text.toString().substring(0,16)
-            lateinit var aux2:BluetoothDevice
-            for(device in bAdapter.bondedDevices){
+            //var aux = txtShow.text.toString().substring(0,16)
+            //lateinit var aux2:BluetoothDevice
+            /*for(device in bAdapter.bondedDevices){
                 if(aux == device.address){
                     aux2 = device
                 }
-            }
-            txtShow.setText("Establishing connection...")
-            lateinit var conect:ConnectThread
-            conect.ConnectThread(bluetoothDevice, bluetoothAdapter)
+            }*/
+
+
+            //txtShow.setText("Establishing connection...")
+            //lateinit var conect:ConnectThread
+            //conect.ConnectThread(bluetoothDevice, bluetoothAdapter)
             //var connectBluetooth = ConnectThread(bluetoothDevice, bluetoothAdapter)
-            conect.start()
+            //conect.start()
             //connectBluetooth.start()
             //var thread: ConnectThread = ConnectThread(aux2)
             //thread.start()
-            txtShow.text = "CONECTADO"
+            //txtShow.text = "CONECTADO"
 
 
             //mmSocket2
@@ -151,6 +211,17 @@ class ActBluethooth : AppCompatActivity() {
         }*/
 
 
+    }
+
+    override fun onResume() {
+        initConexion =  blue.conectaBluetooth()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        offHilo = true
+        blue.exitConexion()
+        super.onPause()
     }
 
 

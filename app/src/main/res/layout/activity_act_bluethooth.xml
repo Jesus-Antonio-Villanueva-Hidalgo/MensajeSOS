@@ -32,22 +32,6 @@
         tools:layout_editor_absoluteY="143dp" />
 
     <Button
-        android:id="@+id/btnON2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ON 2"
-        tools:layout_editor_absoluteX="219dp"
-        tools:layout_editor_absoluteY="220dp" />
-
-    <Button
-        android:id="@+id/btnOFF2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OFF 2"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="298dp" />
-
-    <Button
         android:id="@+id/btnConectar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
