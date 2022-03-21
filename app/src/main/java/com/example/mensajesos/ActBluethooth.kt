@@ -50,16 +50,17 @@ class ActBluethooth : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_act_bluethooth)
 
-        var btnON = findViewById<Button>(R.id.btnON)
-        var btnOFF = findViewById<Button>(R.id.btnOFF)
-        var btnSelectDispositive = findViewById<Button>(R.id.btnSelectDispositive)
-        var btnConectar = findViewById<Button>(R.id.btnConectar)
+        //var btnON = findViewById<Button>(R.id.btnON)
+        //var btnOFF = findViewById<Button>(R.id.btnOFF)
+        //var btnSelectDispositive = findViewById<Button>(R.id.btnSelectDispositive)
+        //var btnConectar = findViewById<Button>(R.id.btnConectar)
         var btnSalir = findViewById<Button>(R.id.btnSalir)
-        var lstvBluetooth = findViewById<ListView>(R.id.lvDispositives)
+        //var lstvBluetooth = findViewById<ListView>(R.id.lvDispositives)
         //var arraylDispositives = arrayListOf<String>()
         var arraylDispositives = mutableListOf<String>()
         var arrayadapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arraylDispositives)
         var txtShow = findViewById<TextView>(R.id.txtShowMessage)
+        val btnApplication = findViewById<Button>(R.id.btnGoApplication)
 
         //val bAdapter = BluetoothAdapter.getDefaultAdapter()
 
@@ -92,27 +93,10 @@ class ActBluethooth : AppCompatActivity() {
 
         }
 
-        btnON.setOnClickListener {
-            blue.mTx("A")
+        btnApplication.setOnClickListener {
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
-
-
-        btnON.setOnLongClickListener {
-            blue.exitConexion()
-            offHilo = true
-            false
-        }
-        btnOFF.setOnClickListener {
-            blue.mTx("B")
-        }
-
-
-        btnOFF.setOnLongClickListener {
-            blue.exitConexion()
-            offHilo = true
-            false
-        }
-
 
 
        /* btnSelectDispositive.setOnClickListener {
@@ -150,15 +134,15 @@ class ActBluethooth : AppCompatActivity() {
             }
         }*/
 
-        lstvBluetooth.setOnItemClickListener { adapterView, view, i, l ->
+        //lstvBluetooth.setOnItemClickListener { adapterView, view, i, l ->
             //var m = arraylDispositives[i]
             //txtShow.text = arraylDispositives[i]
 
             //txtShow.text = lstvBluetooth.getItemAtPosition(i) as String
             //blue.bluetoothSeleccion(i)
-        }
+        //}
 
-        btnConectar.setOnClickListener {
+        //btnConectar.setOnClickListener {
             //var aux = txtShow.text.toString().substring(0,16)
             //lateinit var aux2:BluetoothDevice
             /*for(device in bAdapter.bondedDevices){
@@ -181,7 +165,7 @@ class ActBluethooth : AppCompatActivity() {
 
             //mmSocket2
 
-        }
+        //}
 
 
         /*handler = object : Handler(Looper.getMainLooper()) {

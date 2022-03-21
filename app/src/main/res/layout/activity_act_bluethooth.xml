@@ -5,68 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ActBluethooth">
+    tools:context=".ActBluethooth"
+    android:background="@color/black">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Control por Bluethooth"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="24dp" />
-
-    <Button
-        android:id="@+id/btnON"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ON"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="68dp" />
-
-    <Button
-        android:id="@+id/btnOFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OFF"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="143dp" />
-
-    <Button
-        android:id="@+id/btnConectar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="conectar"
-        tools:layout_editor_absoluteX="229dp"
-        tools:layout_editor_absoluteY="513dp" />
+        android:text="Estatus de la conexión:"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/txtShowMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="249dp"
-        tools:layout_editor_absoluteY="583dp" />
+        android:text="Mensaje de conexión"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btnGoApplication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir a la aplicacion"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="16dp"
+        android:backgroundTint="@color/red"/>
 
     <Button
         android:id="@+id/btnSalir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salir"
-        tools:layout_editor_absoluteX="235dp"
-        tools:layout_editor_absoluteY="633dp" />
-
-    <Button
-        android:id="@+id/btnSelectDispositive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Seleccionar Dispositivo"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="383dp" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lvDispositives"/>
-
+        android:textSize="16dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/red"/>
 
 </LinearLayout>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <TextView
@@ -13,7 +14,7 @@
         android:layout_gravity="center"
         android:text="Contactos que desea agregar a la lista de emergencia"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"/>
@@ -21,10 +22,12 @@
     <Spinner
         android:id="@+id/spinnerinsert"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:entries="@array/list"
+        android:background="@color/white" />
 
     <Button
         android:id="@+id/btnSelectContact"
@@ -33,7 +36,10 @@
         android:text="Seleccionar Contacto"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
+        />
 
     <TextView
         android:id="@+id/textView"
@@ -41,7 +47,7 @@
         android:layout_height="wrap_content"
         android:text="Mensaje a enviar"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:gravity="center"
         android:layout_marginBottom="10dp"/>
 
@@ -51,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ems="14"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:hint="Ingresa tu mensaje"
         android:gravity="start|top"
         android:inputType="textMultiLine" />
@@ -62,6 +70,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
         android:text="Guardar mensaje y contactos" />
 
     <TextView
@@ -69,7 +79,7 @@
         android:layout_height="wrap_content"
         android:text="Contactos que recibiran el mensaje"
         android:textSize="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"/>
@@ -77,10 +87,13 @@
     <Spinner
         android:id="@+id/spinnerShow"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:entries="@array/list"
+        android:background="@color/white"
+        />
 
     <Button
         android:id="@+id/btnSend"
@@ -88,7 +101,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Enviar" />
+        android:text="Enviar"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/lbllatitud"

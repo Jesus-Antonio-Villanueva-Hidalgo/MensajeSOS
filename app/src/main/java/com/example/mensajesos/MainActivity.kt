@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
                }
                //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                //spinner.setAdapter(dataAdapter)
-
+               //listContact.clear()
                dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                spinner2.setAdapter(dataAdapter2)
            }
@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
             var idSms: Long
             var verificationUpdate:Long
             if(listContact.size > 0){
+                listContact.remove("Seleccionar Contacto")
                 for(i in listContact){
                     idContact = dbcontacto.insertcontacts(i)
                 }
@@ -202,6 +203,7 @@ class MainActivity : AppCompatActivity() {
             //loadelements()
             //listContact.clear()
             listContact.removeAll(listContact)
+            listContact.add("Seleccionar Contactos")
         }
 
        var dbcontacts = dbcontactos(this)

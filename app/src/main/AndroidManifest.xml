@@ -21,14 +21,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MensajeSOS">
+
         <activity
             android:name=".ActBluethooth"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".device_name"
             android:exported="false" />
         <activity
-            android:name=".device_name"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
