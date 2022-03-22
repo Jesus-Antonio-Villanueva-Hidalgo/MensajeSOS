@@ -39,13 +39,5 @@
         android:textSize="16dp"
         android:backgroundTint="@color/red"/>
 
-    <Button
-        android:id="@+id/btnSalir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Salir"
-        android:textSize="16dp"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/red"/>
 
 </LinearLayout>

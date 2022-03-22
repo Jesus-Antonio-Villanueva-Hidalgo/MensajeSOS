@@ -2,7 +2,9 @@ package com.example.mensajesos
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.usage.UsageEvents
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -13,7 +15,10 @@ import android.provider.ContactsContract
 import android.provider.ContactsContract.CommonDataKinds
 import android.provider.Settings
 import android.telephony.SmsManager
+import android.util.EventLog
+import android.view.KeyEvent
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     //var listContact = arrayListOf<String>()
     var listContact = mutableListOf<String>()
     var arraylistcontacts = ArrayList<String>()
-    var flag = 0
 
     // Iniciación tardía del viewBinding
     lateinit var binding : ActivityMainBinding
@@ -161,23 +165,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if(etmMessage.text.toString() != ""){
-                /*if(flag == 1){
-                    verificationUpdate = dbcontacto.updatemessage(1,etmMessage.text.toString())
-                    if(verificationUpdate > 0){
-                        Toast.makeText(this,"ACTUALIZACION DEL MENSAJE HECHA",Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this,"ERROR AL ACTUALIZAR MENSAJE",Toast.LENGTH_SHORT).show()
-                    }
-                }
-                if(flag == 0){
-                    flag = 1
-                    idSms = dbcontacto.insertsms(1, etmMessage.text.toString())
-                    if(idSms > 0){
-                        Toast.makeText(this,"MENSAJE GUARDADO",Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this,"ERROR AL GUARDAR MENSAJE",Toast.LENGTH_SHORT).show()
-                    }
-                }*/
 
                 var dbsms = dbcontactos(this)
                 var verification = dbsms.readmessage()
@@ -323,14 +310,6 @@ class MainActivity : AppCompatActivity() {
                 var number:String = cursor.getString(indiceNumber)
                 number = number.replace("(","").replace(")","").replace(" ","").replace("-","")
 
-                /*for(i in listContact){
-                    if(i == number){
-
-                    }else{
-                        listContact.add(number)
-                    }
-                }*/
-
                 listContact.add(number)
 
             }
@@ -351,5 +330,23 @@ class MainActivity : AppCompatActivity() {
         var listcontactAdaptaer = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, dbcontacts.readcontacts())
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.setAdapter(listcontactAdaptaer)
+    }
+
+    @Override
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            var builder = AlertDialog.Builder(this)
+            builder.setMessage("¿Desea salir de Be Safe?")
+            builder.setPositiveButton(android.R.string.ok){
+                dialog, which ->
+                    var intent = Intent(Intent.ACTION_MAIN)
+                    intent.addCategory(Intent.CATEGORY_HOME)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+            }
+            builder.setNegativeButton("Cancelar",null)
+            builder.show()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

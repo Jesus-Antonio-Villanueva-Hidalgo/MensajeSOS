@@ -18,15 +18,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BluetoothJhr(
-){
+class BluetoothJhr(){
 
-
-    /*
-    Permisos manifiest
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-     */
 
     private val TAG = "Dispositivos"
 
@@ -183,8 +176,7 @@ class BluetoothJhr(
     }
 
 
-    private val BTMODULEUUID =
-        UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+    private val BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
 
     /**

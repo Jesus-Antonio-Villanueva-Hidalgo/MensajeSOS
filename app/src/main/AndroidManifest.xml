@@ -26,10 +26,10 @@
             android:name=".ActBluethooth"
             android:exported="false" />
         <activity
-            android:name=".device_name"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".device_name"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

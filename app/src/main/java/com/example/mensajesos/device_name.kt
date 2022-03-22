@@ -5,9 +5,11 @@ import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 class device_name : AppCompatActivity() {
     @SuppressLint("MissingPermission")
@@ -61,5 +63,22 @@ class device_name : AppCompatActivity() {
             blue.bluetoothSeleccion(i)
         }
 
+    }
+    @Override
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            var builder = AlertDialog.Builder(this)
+            builder.setMessage("¿Desea salir de Be Safe?")
+            builder.setPositiveButton(android.R.string.ok){
+                    dialog, which ->
+                var intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_HOME)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            builder.setNegativeButton("Cancelar",null)
+            builder.show()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }
