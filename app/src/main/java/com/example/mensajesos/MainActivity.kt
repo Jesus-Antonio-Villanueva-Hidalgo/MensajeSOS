@@ -22,9 +22,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import com.example.mensajesos.databinding.ActivityMainBinding
 import com.example.mensajesos.db.dbcontactos
 import com.google.android.gms.location.*
+import kotlin.concurrent.thread
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +41,14 @@ class MainActivity : AppCompatActivity() {
 
     // Iniciación tardía del viewBinding
     lateinit var binding : ActivityMainBinding
+
+
+
+    lateinit var blue :BluetoothJhr
+    var initConexion = false
+    var offHilo = false
+
+
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +74,44 @@ class MainActivity : AppCompatActivity() {
 
        var spinner2=findViewById<Spinner>(R.id.spinnerinsert)
        var dataAdapter2 = ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listContact)
+
+        //
+       var arraylDispositives = mutableListOf<String>()
+       var txtShow = findViewById<TextView>(R.id.txtShowMessage)
+       //val btnApplication = findViewById<Button>(R.id.btnGoApplication)
+       //var btnSend = findViewById<Button>(R.id.btnSend)
+
+       blue = BluetoothJhr(this, device_name::class.java)
+       //si se pierde conexion no sale sino que avisa con un mensaje  error
+       blue.exitErrorOk(true)
+       //mensaje conectado
+       blue.mensajeConexion("Conectado jhr")
+       //mensaje de error
+       blue.mensajeErrorTx("algo salio mal")
+
+       thread(start = true){
+           while (!initConexion && !offHilo){
+               Thread.sleep(500)
+           }
+
+           while (!offHilo){
+               var mensaje = blue.mRx()
+               if (mensaje != ""){
+                   txtShow.post {
+
+                       txtShow.text = mensaje
+
+                   }
+               }
+               Thread.sleep(100)
+           }
+
+       }
+
+       txtShow.doAfterTextChanged {
+           btnSend.performClick()
+       }
+
 
 
        fun myMessage() {
@@ -219,6 +267,22 @@ class MainActivity : AppCompatActivity() {
        }
        etmMessage.setText(aux)
     }
+
+
+
+    override fun onResume() {
+        initConexion =  blue.conectaBluetooth()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        offHilo = true
+        blue.exitConexion()
+        super.onPause()
+    }
+
+
+
 
     private fun allPermissionsGrantedGPS() = REQUIRED_PERMISSIONS_GPS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED

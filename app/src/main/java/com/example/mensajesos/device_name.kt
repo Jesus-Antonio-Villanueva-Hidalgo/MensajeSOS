@@ -20,7 +20,7 @@ class device_name : AppCompatActivity() {
         var listview = findViewById<ListView>(R.id.disp)
         var arraylDispositives = mutableListOf<String>()
 
-        val blue = BluetoothJhr(this, listview, ActBluethooth::class.java)
+        val blue = BluetoothJhr(this, listview, MainActivity::class.java)//ActBluethooth::class.java
 
 
         blue.onBluetooth()
